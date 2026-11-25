@@ -1,0 +1,15 @@
+node_modules/
+.expo/
+dist/
+web-build/
+*.log
+.DS_Store
+
+certs/*.pem
+backend/data/*.db
+backend/data/*.db-*
+backend/.env
+admin/dist/
+mobile/ios/
+mobile/android/
+mobile/.expo/

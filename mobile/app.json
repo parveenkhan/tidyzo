@@ -1,0 +1,56 @@
+{
+  "expo": {
+    "name": "TidyZo",
+    "slug": "tidyzo",
+    "scheme": "tidyzo",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "light",
+    "newArchEnabled": true,
+    "splash": {
+      "image": "./assets/splash-icon.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#F4F7F5"
+    },
+    "ios": {
+      "supportsTablet": false,
+      "bundleIdentifier": "com.tidyzo.customer",
+      "infoPlist": {
+        "NSAppTransportSecurity": {
+          "NSAllowsLocalNetworking": true
+        },
+        "NSLocationWhenInUseUsageDescription": "TidyZo uses your location so nearby jobs can reach you."
+      }
+    },
+    "android": {
+      "package": "com.tidyzo.customer",
+      "softwareKeyboardLayoutMode": "resize",
+      "adaptiveIcon": {
+        "backgroundColor": "#0F6E56",
+        "foregroundImage": "./assets/android-icon-foreground.png",
+        "backgroundImage": "./assets/android-icon-background.png"
+      },
+      "permissions": ["android.permission.POST_NOTIFICATIONS", "ACCESS_COARSE_LOCATION", "ACCESS_FINE_LOCATION"]
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
+    },
+    "plugins": [
+      "expo-font",
+      "expo-secure-store",
+      [
+        "expo-location",
+        {
+          "locationWhenInUsePermission": "TidyZo uses your location so nearby jobs can reach you."
+        }
+      ],
+      [
+        "expo-notifications",
+        {
+          "color": "#0F6E56"
+        }
+      ]
+    ]
+  }
+}

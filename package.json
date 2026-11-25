@@ -1,0 +1,15 @@
+{
+  "name": "tidyzo",
+  "private": true,
+  "version": "1.0.0",
+  "description": "TidyZo home-services MVP: Expo customer app, React admin, and HTTPS API.",
+  "scripts": {
+    "cert": "node scripts/generate-cert.mjs",
+    "install:all": "npm --prefix backend install && npm --prefix admin install && npm --prefix mobile install",
+    "backend": "npm --prefix backend run dev",
+    "admin": "npm --prefix admin run dev",
+    "mobile": "npm --prefix mobile start",
+    "mobile:web": "npm --prefix mobile run web",
+    "test": "npm --prefix backend test"
+  }
+}
