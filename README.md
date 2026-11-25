@@ -56,7 +56,7 @@ What each one opens:
 
 | App | Address | Notes |
 | --- | --- | --- |
-| API | https://localhost:8443 and http://localhost:8080 | Admin uses HTTPS. The phone and simulator use HTTP on 8080 because they reject the local certificate. |
+| API | https://localhost:8443 and http://localhost:8080 | Admin uses HTTPS. This demo points the phone and simulator at HTTP on 8080 so they can reach the local server. A real deployment should point the mobile app at HTTPS. |
 | Admin desk | http://localhost:5173 | Proxies `/api` to the HTTPS API. |
 | Mobile | Expo dev server | Press `i` for the iOS simulator, or run `npm run mobile:web` for the browser. |
 
@@ -67,7 +67,7 @@ cd mobile
 npx expo run:ios --device "iPhone 16 Plus"
 ```
 
-To watch a consumer and a provider at the same time, build the same app onto a second simulator. Both phones use http://localhost:8080.
+To watch a consumer and a provider at the same time, build the same app onto a second simulator. In this local demo both phones use http://localhost:8080.
 
 ```bash
 npx expo run:ios --device "iPhone 16"
@@ -98,7 +98,9 @@ The OTP response includes `debugOtp` in development so the flow works without an
 
 ## Security
 
-- TLS certificate for the API (`certs/`, generated locally, private key not committed). TLS 1.2 minimum.
+This repository is a local demo. The mobile app calls `http://localhost:8080` because the simulator rejects the self-signed certificate created by `npm run cert`. That HTTP port is only for running the demo on this machine. For a real project, serve the API with a trusted certificate and set `EXPO_PUBLIC_API_URL` to that `https://` address before building the app.
+
+- TLS certificate for the API (`certs/`, generated locally, private key not committed). TLS 1.2 minimum. The admin desk already uses HTTPS on port 8443.
 - Customer JWT is stored in the iOS/Android keychain through Expo SecureStore. The web demo uses `sessionStorage`. It is not written into AsyncStorage.
 - Admin JWT stays in `sessionStorage` and is dropped when the tab closes.
 - Logout bumps `token_version`, so the previous token stops working.
@@ -112,7 +114,7 @@ Copy `backend/.env.example` to `backend/.env` before sharing the machine. Replac
 
 ## Phone testing
 
-`npm run cert` adds this computer's LAN address to the certificate. On the phone, Expo will call `https://<that-address>:8443`. Install and trust the certificate on the phone, or run the customer app with `npm run mobile:web` on this computer. If the LAN address changes, run `npm run cert` again and restart the API.
+`npm run cert` adds this computer's LAN address to the certificate used by the admin desk. The mobile demo still uses HTTP so a phone or simulator can reach the local API. On a real network, replace that with HTTPS and trust a proper certificate. If the LAN address changes, run `npm run cert` again and restart the API.
 
 ## Checks
 
